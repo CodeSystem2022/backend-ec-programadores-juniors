@@ -146,11 +146,11 @@ AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5 # 60 seg x 5
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
 
 AUTH_COOKIE_PATH = '/'
-AUTH_COOKIE_SAMESITE = None
+AUTH_COOKIE_SAMESITE = "None"
 
 AUTH_COOKIE_HTTP_ONLY = True
 
-AUTH_COOKIE_SECURE = False
+AUTH_COOKIE_SECURE = True
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
@@ -178,11 +178,11 @@ SITE_NAME = 'Nombre del Sitio'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if not DEBUG:
+if  DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.resend.com'
     EMAIL_PORT = 587  # El puerto puede variar según el servidor SMTP
     EMAIL_USE_TLS = True  # Usar TLS si el servidor lo requiere
     EMAIL_HOST_USER = 'resend'
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    DEFAULT_FROM_EMAIL = "test-auth <noreply@sport-blend.com>"
+    DEFAULT_FROM_EMAIL = "test-auth <noreply@gastonfr.com>"
