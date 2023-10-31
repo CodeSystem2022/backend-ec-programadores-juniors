@@ -142,15 +142,16 @@ REST_FRAMEWORK = {
 # JWT Authentication
 AUTH_COOKIES = 'access'
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5 # 60 seg x 5
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 10 # 60 seg x 5
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
 
 AUTH_COOKIE_PATH = '/'
-AUTH_COOKIE_SAMESITE = "None"
+AUTH_COOKIE_SAMESITE = 'None'
 
 AUTH_COOKIE_HTTP_ONLY = True
 
-AUTH_COOKIE_SECURE = True
+AUTH_COOKIE_SECURE = True 
+#AUTH_COOKIE_SECURE = False # Para Thunder
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
@@ -159,11 +160,14 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
-    #'SERIALIZERS': {},
+    # 'SERIALIZERS': {
+    #     'current_user': 'apps.user.serializers.UserProfileSerializer'
+    # },
 }
 
 CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Auth User Settings
 AUTH_USER_MODEL = 'user.UserAccount'
