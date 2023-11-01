@@ -38,6 +38,7 @@ PROJECT_APPS = [
     'apps.user',
     'apps.product',
     'apps.category'
+    'apps.user_profile'
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
