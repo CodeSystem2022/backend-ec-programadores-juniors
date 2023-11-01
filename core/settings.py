@@ -182,7 +182,7 @@ SITE_NAME = 'Nombre del Sitio'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if  DEBUG:
+if  not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.resend.com'
     EMAIL_PORT = 587  # El puerto puede variar según el servidor SMTP
