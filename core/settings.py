@@ -199,6 +199,6 @@ if not DEBUG:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = "test-auth <noreply@gastonfr.com>"
 
-STRIPE_SECTER_KEY = "sk_test_51O9wXTGTbeJAGBD4Hb8bTYUGtx4KpQqCU757gr78j7EwKSj9jRIB0vfGFeNDtsGLF9mJs6DijeYyxlL1igT2f1JP00XKkjTiz1"
+STRIPE_SECTER_KEY = env('STRIPE_SECTER_KEY')
 
 SITE_URL = "http://localhost:5173"
