@@ -169,10 +169,6 @@ DJOSER = {
     # },
 }
 
-# Mercadopago
-MERCADOPAGO_CLIENT_ID = '6423700516493874'
-MERCADOPAGO_CLIENT_SECRET = env('CLIENT_SECRET')
-
 CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
@@ -185,7 +181,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email template
 DOMAIN = env('DOMAIN')
-SITE_NAME = 'Nombre del Sitio'
+SITE_NAME = 'Sport Blend'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -199,6 +195,9 @@ if not DEBUG:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = "test-auth <noreply@gastonfr.com>"
 
-STRIPE_SECTER_KEY = env('STRIPE_SECTER_KEY')
 
+# Stripe Settings
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+#Redirección luego del Checkout
 SITE_URL = "http://localhost:5173"
