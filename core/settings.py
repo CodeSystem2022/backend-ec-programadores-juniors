@@ -181,7 +181,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email template
 DOMAIN = env('DOMAIN')
-SITE_NAME = 'Nombre del Sitio'
+SITE_NAME = 'Sport Blend'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -197,5 +197,7 @@ if not DEBUG:
 
 
 # Stripe Settings
-STRIPE_SECTER_KEY = env('STRIPE_SECTER_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+#Redirección luego del Checkout
 SITE_URL = "http://localhost:5173"
