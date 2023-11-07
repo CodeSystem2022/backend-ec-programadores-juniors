@@ -38,7 +38,8 @@ PROJECT_APPS = [
     'apps.user',
     'apps.product',
     'apps.category',
-    'apps.user_profile'
+    'apps.user_profile',
+    'apps.payment'
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
@@ -145,16 +146,16 @@ REST_FRAMEWORK = {
 # JWT Authentication
 AUTH_COOKIES = 'access'
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 10 # 60 seg x 5
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 10  # 60 seg x 5
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
 
 AUTH_COOKIE_PATH = '/'
 AUTH_COOKIE_SAMESITE = 'None'
 
-AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_HTTP_ONLY = False
 
-AUTH_COOKIE_SECURE = True 
-#AUTH_COOKIE_SECURE = False # Para Thunder
+AUTH_COOKIE_SECURE = True
+# AUTH_COOKIE_SECURE = False # Para Thunder
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
@@ -168,6 +169,10 @@ DJOSER = {
     # },
 }
 
+# Mercadopago
+MERCADOPAGO_CLIENT_ID = '6423700516493874'
+MERCADOPAGO_CLIENT_SECRET = env('CLIENT_SECRET')
+
 CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
@@ -176,7 +181,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = 'user.UserAccount'
 
 # Email settings
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email template
 DOMAIN = env('DOMAIN')
@@ -193,3 +198,7 @@ if not DEBUG:
     EMAIL_HOST_USER = 'resend'
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = "test-auth <noreply@gastonfr.com>"
+
+STRIPE_SECTER_KEY = "sk_test_51O9wXTGTbeJAGBD4Hb8bTYUGtx4KpQqCU757gr78j7EwKSj9jRIB0vfGFeNDtsGLF9mJs6DijeYyxlL1igT2f1JP00XKkjTiz1"
+
+SITE_URL = "http://localhost:5173"
