@@ -35,7 +35,11 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 PROJECT_APPS = [
-    'apps.user'
+    'apps.user',
+    'apps.product',
+    'apps.category',
+    'apps.user_profile',
+    'apps.payment'
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
@@ -142,15 +146,16 @@ REST_FRAMEWORK = {
 # JWT Authentication
 AUTH_COOKIES = 'access'
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5 # 60 seg x 5
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 10  # 60 seg x 5
 AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
 
 AUTH_COOKIE_PATH = '/'
-AUTH_COOKIE_SAMESITE = None
+AUTH_COOKIE_SAMESITE = 'None'
 
-AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_HTTP_ONLY = False
 
-AUTH_COOKIE_SECURE = False
+AUTH_COOKIE_SECURE = True
+# AUTH_COOKIE_SECURE = False # Para Thunder
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
@@ -159,17 +164,24 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
-    #'SERIALIZERS': {},
+    # 'SERIALIZERS': {
+    #     'current_user': 'apps.user.serializers.UserProfileSerializer'
+    # },
 }
+
+# Mercadopago
+MERCADOPAGO_CLIENT_ID = '6423700516493874'
+MERCADOPAGO_CLIENT_SECRET = env('CLIENT_SECRET')
 
 CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS').split(',')
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Auth User Settings
 AUTH_USER_MODEL = 'user.UserAccount'
 
 # Email settings
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email template
 DOMAIN = env('DOMAIN')
@@ -177,3 +189,16 @@ SITE_NAME = 'Nombre del Sitio'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+if not DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.resend.com'
+    EMAIL_PORT = 587  # El puerto puede variar según el servidor SMTP
+    EMAIL_USE_TLS = True  # Usar TLS si el servidor lo requiere
+    EMAIL_HOST_USER = 'resend'
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = "test-auth <noreply@gastonfr.com>"
+
+STRIPE_SECTER_KEY = env('STRIPE_SECTER_KEY')
+
+SITE_URL = "http://localhost:5173"
