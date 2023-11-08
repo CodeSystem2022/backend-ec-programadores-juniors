@@ -4,11 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import redirect
 from rest_framework.permissions import AllowAny
-
-
 import stripe
 # This is your test secret API key.
-stripe.api_key = settings.STRIPE_SECTER_KEY
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class StripeCheckoutView(APIView):
