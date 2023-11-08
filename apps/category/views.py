@@ -1,32 +1,50 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import permissions
-from .models import Category
+from .models import Category  # Asegúrate de importar tu modelo Category
+from rest_framework.permissions import AllowAny
+from ..product.models import Product
+from .serializers import ProductSerializer
 
-class ListCategoriesView(APIView):
-    permission_classes = (permissions.AllowAny, )
+class CategoryList(APIView):
+    permission_classes = (AllowAny, )
+    
+    def get(self, request):
+            categories_by_gender = {}
+            for gender, _ in Category.GENDER_CHOICES:
+                categories = Category.objects.filter(gender=gender)
+                category_data = [
+                    {
+                        'name': category.name,
+                        'gender': category.get_gender_display(),  # Obtiene el valor legible del campo de selección
+                    }
+                    for category in categories
+                ]
+                categories_by_gender[gender] = category_data
+            return Response(categories_by_gender)
 
-    def get(self, request, format=None):
-        categories = Category.objects.filter(parent=None)
+class ProductListByGender(APIView):
+    permission_classes = (AllowAny, )
+    def get(self, request, gender):
+        try:
+            products = Product.objects.filter(category__gender=gender)
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Product.DoesNotExist:
+            return Response([], status=status.HTTP_404_NOT_FOUND)
 
-        result = []
+class ProductListByGenderAndCategory(APIView):
+    permission_classes = (AllowAny, )
+    def get(self, request, name, gender):
+        try:
+            products = Product.objects.filter(category__gender=gender,category__name=name) 
+    
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Product.DoesNotExist:
+            return Response([], status=status.HTTP_404_NOT_FOUND)
 
-        for category in categories:
-            item = {
-                'id': category.id,
-                'name': category.name,
-                'sub_categories': [],
-            }
 
-            for sub_category in category.children.all():
-                sub_item = {
-                    'id': sub_category.id,
-                    'name': sub_category.name,
-                    'sub_categories': [],
-                }
-                item['sub_categories'].append(sub_item)
 
-            result.append(item)
 
-        return Response({'categories': result}, status=status.HTTP_200_OK)
+
