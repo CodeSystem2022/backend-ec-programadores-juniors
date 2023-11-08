@@ -16,7 +16,6 @@ class ListCategoriesView(APIView):
             item = {
                 'id': category.id,
                 'name': category.name,
-                'gender': category.get_gender_display(),
                 'sub_categories': [],
             }
 
@@ -24,7 +23,6 @@ class ListCategoriesView(APIView):
                 sub_item = {
                     'id': sub_category.id,
                     'name': sub_category.name,
-                    'gender': sub_category.get_gender_display(),
                     'sub_categories': [],
                 }
                 item['sub_categories'].append(sub_item)
