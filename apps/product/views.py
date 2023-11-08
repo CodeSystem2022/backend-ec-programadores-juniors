@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
-import mercadopago
 from apps.product.models import Product
 from apps.product.serializers import ProductSerializer
 from apps.category.models import Category
@@ -213,7 +212,6 @@ class ListRelatedView(APIView):
 
 class ProductsPayment(APIView):
     permission_classes = (permissions.AllowAny, )
-    sdk = mercadopago.SDK('APP_USR-6423700516493874-110620-cb393153693c1ceccb189606d5b106db-159979555')
 
     payment_data = {
         "transaction_amount": 100,
@@ -225,8 +223,6 @@ class ProductsPayment(APIView):
         }
     }
 
-    payment_response = sdk.payment().create(payment_data)
-    payment = payment_response["response"]
 
 class ListBySearchView(APIView):
     permission_classes = (permissions.AllowAny, )
