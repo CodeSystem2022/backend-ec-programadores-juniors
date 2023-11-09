@@ -200,4 +200,4 @@ if not DEBUG:
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 
 #Redirección luego del Checkout
-SITE_URL = "http://localhost:5173"
+SITE_URL = "https://ec-programadores-juniors.vercel.app/"
