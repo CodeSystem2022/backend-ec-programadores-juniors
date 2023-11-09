@@ -26,9 +26,9 @@ class Product(models.Model):
 
     def available_sizes(self):
         if self.category.name == 'indumentaria':
-            return ['S', 'M', 'L', 'XL']
+            return ['XS','S', 'M', 'L', 'XL']
         elif self.category.name == 'calzado':
-            return ['6','7','7.5','8', '8.5', '9', '9.5','10','10.5','11','12']  # Agrega más tamaños si es necesario para calzado
+            return ['4','5','5.5','6','7','7.5','8', '8.5', '9', '9.5','10','10.5','11','12']  # Agrega más tamaños si es necesario para calzado
         else:
             return []
 
